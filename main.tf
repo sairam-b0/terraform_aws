@@ -1,5 +1,5 @@
 resource "aws_vpc" "myVpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.cidr_block
   tags = {
     Name= "myvpc"
   }
@@ -92,14 +92,14 @@ resource "aws_internet_gateway_attachment" "attachment" {
 
 
 resource "aws_instance" "example" {
-  ami = "ami-01d03173bef0a0a89"
-  instance_type = "t3.micro"
+  ami = var.ami
+  instance_type = var.instance_type
   vpc_security_group_ids = [ aws_security_group.mySecurity.id ]
   subnet_id = aws_subnet.myPublicSubnet1.id
   associate_public_ip_address = true
 
   tags = {
-    Name= "server"
+    Name= "Demon-server"
   }
 
 }
